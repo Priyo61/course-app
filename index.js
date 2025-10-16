@@ -5,16 +5,12 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "1234567890";
 const { z } = require("zod");
+const { userRouter } = require("./routes/user");
+const { courseRouter } = require("./routes/course");
 app.use(express.json());
 
-app.post("/user/signup", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-});
-app.post("/user/signin", (req, res) => {});
-app.get("/user/purchases", (req, res) => {});
-app.post("/course/purchase", (req, res) => {});
-app.get("/courses", (req, res) => {});
+app.use("/user", userRouter);
+app.use("/course", courseRouter);
 
 app.listen(port, () => {
   console.log("connected to server");
